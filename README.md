@@ -20,7 +20,7 @@ Projeto acadêmico do curso de Análise e Desenvolvimento de Sistemas.
 - JavaScript (ES Modules, sem build step, sem dependências externas)
 - Web Storage API (`localStorage`)
 
-Nenhum framework, biblioteca ou pacote NPM foi utilizado na lógica da aplicação. A única integração externa é a fonte Poppins, carregada via Google Fonts.
+Nenhum framework ou biblioteca foi utilizado na lógica da aplicação (código que roda no navegador). A única integração externa é a fonte Poppins, carregada via Google Fonts. As dependências em `package.json` (`terser`, `clean-css`, `html-minifier-terser`, `sharp`) existem só para o **build de produção** — não são carregadas pelo site em nenhum momento.
 
 ## Estrutura de pastas
 
@@ -33,15 +33,20 @@ Nenhum framework, biblioteca ou pacote NPM foi utilizado na lógica da aplicaç�
 │   └── style.css          Folha de estilos única: design system, grid, componentes e breakpoints
 ├── img/
 │   └── equipe-voluntarios.webp
-└── js/
-    ├── main.js            Ponto de entrada: inicializa menu e roteador
-    ├── router.js          Roteamento por hash e renderização das views
-    ├── nav.js             Menu hambúrguer, submenu e link ativo
-    ├── validation.js      Máscaras, validação e feedback do formulário
-    ├── storage.js         Leitura/gravação no localStorage
-    ├── theme.js           Alternância de tema claro/escuro
-    ├── templates/         Uma função de template por página (retornam HTML a partir de dados)
-    └── data/              Dados das páginas (ex.: lista de projetos)
+├── js/
+│   ├── main.js            Ponto de entrada: inicializa menu e roteador
+│   ├── router.js          Roteamento por hash e renderização das views
+│   ├── nav.js             Menu hambúrguer, submenu e link ativo
+│   ├── validation.js      Máscaras, validação e feedback do formulário
+│   ├── storage.js         Leitura/gravação no localStorage
+│   ├── theme.js           Alternância de tema claro/escuro
+│   ├── templates/         Uma função de template por página (retornam HTML a partir de dados)
+│   └── data/              Dados das páginas (ex.: lista de projetos)
+├── scripts/
+│   └── build.mjs          Script de build de produção (minificação + compressão de imagens)
+├── .github/workflows/
+│   └── deploy.yml         Pipeline de build + deploy automático no GitHub Pages
+└── dist/                  Gerado pelo build (não versionado)
 ```
 
 ## Como executar localmente
@@ -57,6 +62,28 @@ python -m http.server 8080
 Depois acesse `http://localhost:8080/html/index.html`.
 
 Qualquer outro servidor estático (Live Server do VS Code, `npx serve`, etc.) também funciona.
+
+Para desenvolvimento, os arquivos de `html/`, `css/` e `js/` são servidos como estão — **nenhum build é necessário** para rodar o projeto localmente.
+
+## Build de produção
+
+```bash
+npm install
+npm run build
+```
+
+O script `scripts/build.mjs` gera uma versão otimizada em `dist/` (mesma estrutura de pastas do projeto):
+
+- **CSS**: minificado com `clean-css`.
+- **JavaScript**: minificado com `terser` (mantendo os módulos ES).
+- **HTML**: minificado com `html-minifier-terser` (espaços, comentários).
+- **Imagem**: `equipe-voluntarios.webp` recomprimida com `sharp` (qualidade 78).
+
+No total, o build reduz o peso dos arquivos em cerca de **60%** (a imagem sozinha cai de ~249 KB para ~80 KB). `dist/` não é versionado (está no `.gitignore`) — é gerado a cada build, seja localmente ou pelo pipeline de deploy.
+
+## Deploy
+
+O deploy é automático via **GitHub Actions**: a cada push em `main`, o workflow [`deploy.yml`](.github/workflows/deploy.yml) instala as dependências, roda `npm run build` e publica o conteúdo de `dist/` no **GitHub Pages**.
 
 ## Arquitetura da SPA
 
