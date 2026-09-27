@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ONG Mãos que Ajudam - Transformando vidas através da solidariedade e do voluntariado."
+    />
+    <meta
+      name="keywords"
+      content="ONG, voluntariado, solidariedade, doação, projetos sociais"
+    />
+    <meta name="author" content="ONG Mãos que Ajudam" />
+    <title>Mãos que Ajudam | Início</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/theme.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- CABEÇALHO (fixo: não é trocado pelo roteador da SPA) -->
+    <header class="site-header">
+      <div class="container header-content">
+        <a
+          href="#/"
+          class="logo"
+          aria-label="Página inicial da ONG Mãos que Ajudam"
+        >
+          <span class="logo-icon" aria-hidden="true">🤝</span>
+          <span class="logo-text">Mãos que Ajudam</span>
+        </a>
+        <nav aria-label="Navegação principal">
+          <button
+            type="button"
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-controls="nav-list"
+            aria-expanded="false"
+            aria-label="Abrir menu de navegação"
+          >
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+          <ul class="nav-list" id="nav-list">
+            <li><a href="#/" data-route="/">Início</a></li>
+            <li class="has-dropdown">
+              <a href="#/projetos" data-route="/projetos">Projetos</a>
+              <ul class="dropdown-menu">
+                <li><a href="#/projetos/educacao">Educação</a></li>
+                <li><a href="#/projetos/alimentacao">Alimentação</a></li>
+                <li><a href="#/projetos/capacitacao">Capacitação</a></li>
+                <li><a href="#/projetos/saude">Saúde</a></li>
+                <li><a href="#/projetos/meio-ambiente">Meio Ambiente</a></li>
+                <li><a href="#/projetos/cultura">Cultura</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#/cadastro" class="btn-nav" data-route="/cadastro"
+                >Seja Voluntário</a
+              >
+            </li>
+            <li>
+              <button
+                type="button"
+                class="theme-toggle"
+                id="theme-toggle"
+                aria-label="Mudar para tema claro"
+              >
+                <span class="theme-toggle-icon" aria-hidden="true"></span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL: trocado pelo roteador (js/router.js) conforme a URL -->
+    <main id="app-view" tabindex="-1">
+      <noscript>
+        <div class="container" style="padding: 3rem 0">
+          <p>
+            Este site precisa de JavaScript ativado para exibir o conteúdo.
+            Contato: contato@maosqueajudam.org · (11) 4002-8922
+          </p>
+        </div>
+      </noscript>
+    </main>
+
+    <!-- RODAPÉ (fixo: não é trocado pelo roteador da SPA) -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Mãos que Ajudam</h3>
+          <p>Transformando vidas desde 2013.</p>
+        </div>
+        <nav aria-label="Links do rodapé">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#/">Início</a></li>
+            <li><a href="#/projetos">Projetos</a></li>
+            <li><a href="#/cadastro">Cadastro</a></li>
+          </ul>
+        </nav>
+        <address>
+          <h4>Contato</h4>
+          <p>contato@maosqueajudam.org</p>
+          <p>(11) 4002-8922</p>
+          <p>São Paulo - SP</p>
+        </address>
+      </div>
+      <p class="copyright">
+        &copy; 2025 ONG Mãos que Ajudam. Todos os direitos reservados.
+      </p>
+    </footer>
+
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>
