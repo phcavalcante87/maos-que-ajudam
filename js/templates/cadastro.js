@@ -236,7 +236,6 @@ export function cadastroTemplate() {
             id="form-feedback"
             class="form-feedback"
             role="alert"
-            aria-live="polite"
           ></div>
         </form>
       </div>
