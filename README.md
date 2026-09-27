@@ -66,6 +66,18 @@ Qualquer outro servidor estático (Live Server do VS Code, `npx serve`, etc.) ta
 - **Validação**: `validation.js` liga máscaras, validações e autosave de rascunho ao formulário sempre que a view de cadastro é montada.
 - **Persistência**: toda leitura/gravação em `localStorage` passa por `storage.js`, o único módulo que conhece esse detalhe de implementação.
 
+## Versionamento
+
+O projeto segue o modelo **GitFlow**:
+
+- `main` recebe apenas merges de release, sempre marcados com uma tag (`v1.0.0`).
+- `develop` é a branch de integração de todo o trabalho em andamento.
+- `feature/*` isola cada funcionalidade, nasce a partir de `develop` e é descartada após o merge.
+
+Cada funcionalidade tem uma **Issue** de acompanhamento, é desenvolvida em sua branch e integrada via **Pull Request** para `develop` (corpo do PR com `Closes #N`), fechando a issue automaticamente quando o release chega em `main`. O trabalho é organizado por **Milestones**, um por etapa do projeto.
+
+Commits seguem o padrão [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `style:`, `chore:`, `docs:`), descrevendo o que mudou e por quê.
+
 ## Licença
 
 Projeto acadêmico, sem licença de uso definida.
