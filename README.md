@@ -66,6 +66,18 @@ Qualquer outro servidor estático (Live Server do VS Code, `npx serve`, etc.) ta
 - **Validação**: `validation.js` liga máscaras, validações e autosave de rascunho ao formulário sempre que a view de cadastro é montada.
 - **Persistência**: toda leitura/gravação em `localStorage` passa por `storage.js`, o único módulo que conhece esse detalhe de implementação.
 
+## Acessibilidade
+
+O projeto busca conformidade com a **WCAG 2.1 (Nível AA)**. Práticas adotadas:
+
+- **Estrutura semântica**: `header`/`nav`/`main`/`footer` como landmarks, hierarquia de títulos sem saltos, `aria-labelledby` associando cada seção ao seu título.
+- **Navegação por teclado**: skip link ("Pular para o conteúdo principal") antes do cabeçalho; submenu de projetos acessível via `:focus-within` (não depende de mouse); indicador de foco visível (`:focus-visible`) só para navegação por teclado.
+- **Leitores de tela**: `aria-expanded`/`aria-controls` no menu hambúrguer; `aria-label` dinâmico no botão de tema; `aria-invalid` sincronizado em cada campo do formulário (não só a cor da borda indica erro); `role="alert"` no feedback do formulário; foco movido para o conteúdo a cada troca de rota, já que a SPA não recarrega a página.
+- **Contraste de cor**: todas as combinações de texto/fundo dos dois temas foram verificadas com a fórmula de luminância relativa do WCAG 2.1 (mesmo cálculo do WebAIM Contrast Checker). Duas falhas encontradas (botões com texto branco e a mensagem de erro no tema escuro) foram corrigidas; todos os pares atualmente atingem no mínimo 4.5:1 (texto) ou 3:1 (indicador de foco).
+- **Movimento**: toda animação e transição é desativada quando o usuário tem `prefers-reduced-motion: reduce` ativado no sistema.
+
+Este é um processo contínuo, não uma certificação formal — outros critérios (como reflow em zoom de 400% ou testes com leitores de tela reais) ainda não foram verificados.
+
 ## Versionamento
 
 O projeto segue o modelo **GitFlow**:
