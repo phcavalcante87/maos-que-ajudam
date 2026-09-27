@@ -123,8 +123,28 @@ export function mountCadastroForm() {
     saveDraft(draft);
   }
 
+  // ----- aria-invalid (leitores de tela) -----
+  // Espelha a mesma regra visual do CSS (:invalid:not(:placeholder-shown)):
+  // só marca erro depois que o campo recebeu algum conteúdo, para não soar
+  // como "inválido" um campo obrigatório que o usuário ainda nem tocou.
+  function syncAriaInvalid(field) {
+    if (!field.willValidate) return;
+    const hasContent = field.type === "checkbox" || field.value.trim() !== "";
+    if (hasContent && !field.validity.valid) {
+      field.setAttribute("aria-invalid", "true");
+    } else {
+      field.removeAttribute("aria-invalid");
+    }
+  }
+
+  function syncAllAriaInvalid() {
+    Array.prototype.forEach.call(form.elements, syncAriaInvalid);
+  }
+
   form.addEventListener("input", persistDraft);
   form.addEventListener("change", persistDraft);
+  form.addEventListener("input", syncAllAriaInvalid);
+  form.addEventListener("change", syncAllAriaInvalid);
 
   // Os links de termos/privacidade ainda não têm página própria. Com roteamento
   // por hash, href="#" apontaria para a rota vazia e tiraria o usuário do
@@ -153,6 +173,9 @@ export function mountCadastroForm() {
         form.elements,
         (el) => el.willValidate && !el.validity.valid,
       );
+      // No envio, marca até os campos obrigatórios vazios (syncAllAriaInvalid
+      // sozinho não os marcaria, pois exige conteúdo digitado).
+      invalid.forEach((field) => field.setAttribute("aria-invalid", "true"));
       showFeedback(
         "error",
         "Revise os campos: " + invalid.map(fieldName).join(", ") + ".",
@@ -180,6 +203,9 @@ export function mountCadastroForm() {
       updateCounter();
       cpfInput.setCustomValidity("");
     }, 0);
+    Array.prototype.forEach.call(form.elements, (field) =>
+      field.removeAttribute?.("aria-invalid"),
+    );
     clearFeedback();
     clearDraft();
   });

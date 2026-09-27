@@ -75,8 +75,16 @@
   --badge-bg: #c4b4ff;
   --badge-text: #1a1a24;
 
+  /* Variante mais escura de --accent-primary, usada como fundo sólido sob
+     texto branco (.btn-primary, .btn-nav, .btn-outline:hover). O tom padrão
+     não atinge 4.5:1 com branco (WCAG 1.4.3); esta variante atinge. */
+  --accent-primary-contrast: #007aca;
+  --accent-primary-contrast-hover: #0068ac;
+
   /* Estados */
-  --status-error: #ff6b78;
+  /* Ajustado de #ff6b78 (4.28:1 sobre --surface-raised, falha AA) para
+     #ff7480 (4.53:1), corrigindo o texto de erro do formulário. */
+  --status-error: #ff7480;
   --status-success: #3ddc97;
 
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -107,6 +115,11 @@
   --accent-highlight: #6d28d9;
   --badge-bg: #ede9ff;
   --badge-text: #4c1d95;
+
+  /* Variante mais escura de --accent-primary para fundo sólido sob texto
+     branco (ver comentário equivalente no tema escuro). */
+  --accent-primary-contrast: #0079c9;
+  --accent-primary-contrast-hover: #006bb3;
 
   --status-error: #cc2937;
   --status-success: #1b873f;
@@ -192,6 +205,22 @@ ul {
   100% {
     box-shadow: none;
   }
+}
+
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: var(--space-4);
+  z-index: 1000;
+  padding: 0.7rem 1.2rem;
+  background: var(--accent-primary-contrast);
+  color: var(--accent-on-primary);
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 .visually-hidden {
@@ -331,7 +360,7 @@ ul {
 }
 
 .btn-nav {
-  background: var(--accent-primary) !important;
+  background: var(--accent-primary-contrast) !important;
   color: var(--accent-on-primary) !important;
   padding: 0.55rem 1.2rem !important;
   border-radius: 999px;
@@ -339,7 +368,7 @@ ul {
 }
 
 .btn-nav:hover {
-  background: var(--accent-primary-hover) !important;
+  background: var(--accent-primary-contrast-hover) !important;
 }
 
 .theme-toggle {
@@ -398,13 +427,13 @@ ul {
 }
 
 .btn-primary {
-  background: var(--accent-primary);
+  background: var(--accent-primary-contrast);
   color: var(--accent-on-primary);
   box-shadow: 0 4px 14px rgba(0, 149, 246, 0.35);
 }
 
 .btn-primary:hover {
-  background: var(--accent-primary-hover);
+  background: var(--accent-primary-contrast-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 149, 246, 0.45);
 }
@@ -416,7 +445,7 @@ ul {
 }
 
 .btn-outline:hover {
-  background: var(--accent-primary);
+  background: var(--accent-primary-contrast);
   color: var(--accent-on-primary);
 }
 
