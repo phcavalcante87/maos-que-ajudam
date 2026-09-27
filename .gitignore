@@ -1,0 +1,18 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores/IDEs
+.vscode/
+.idea/
+
+# Dependências (caso alguma ferramenta de build/otimização seja adicionada)
+node_modules/
+
+# Saída de build/produção
+dist/
+build/
+
+# Arquivos temporários de teste
+*.local.*
